@@ -3,6 +3,8 @@ package dev.tau.restclientsamples.post;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.client.JdkClientHttpRequestFactory;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
@@ -15,8 +17,13 @@ public class PostService {
     private final RestClient restClient;
 
     public PostService(RestClient.Builder builder) {
+
+        JdkClientHttpRequestFactory requestFactory = new JdkClientHttpRequestFactory();
+        requestFactory.setReadTimeout(10000);
+
         this.restClient = builder
                 .baseUrl("https://jsonplaceholder.typicode.com")
+                .requestFactory(requestFactory)
                 .build();
     }
 

@@ -13,6 +13,7 @@ import java.util.List;
 public class RestClientSamplesApplication {
 
 	public static void main(String[] args) {
+		System.setProperty("jdk.httpclient.HttpClient.log", "all");
 		SpringApplication.run(RestClientSamplesApplication.class, args);
 	}
 
